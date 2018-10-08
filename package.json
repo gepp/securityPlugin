@@ -1,0 +1,21 @@
+{
+  "name": "cordova-plugin-security",
+  "version": "1.0.1",
+  "description": "cordova-plugin-security-RSA",
+  "cordova": {
+    "id": "securityPlugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
+  "keywords": [
+    "security"
+  ],
+  "author": "ge_pingping",
+  "license": "MIT"
+}

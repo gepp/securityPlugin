@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="securityPlugin" version="1.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>securityPlugin</name>
+    <js-module name="securityPlugin" src="www/securityPlugin.js">
+        <clobbers target="securityPlugin" />
+    </js-module>
+    <platform name="android">  
+        <source-file src="src/android/SecurityUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>
+        <source-file src="src/android/Base64Util.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>
+        <source-file src="src/android/JsonUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>
+        <source-file src="src/android/RSAUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>    
+        <source-file src="src/android/FileUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>    
+        <source-file src="src/android/libs/fastjson-1.2.4.jar" target-dir="app/src/main/libs"/>
+        <config-file target="res/xml/config.xml" parent="/*">  
+            <feature name="SecurityUtil">  
+                <param name="android-package" value="com.runchain.plugins.security.SecurityUtil"/>  
+            </feature>  
+        </config-file>  
+    </platform>  
+</plugin>
