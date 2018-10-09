@@ -1,6 +1,6 @@
 {
   "name": "runchain-cordova-plugin-security",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "cordova-plugin-security-RSA",
   "cordova": {
     "id": "securityPlugin",
