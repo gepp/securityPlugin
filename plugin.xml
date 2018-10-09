@@ -7,7 +7,6 @@
     <platform name="android">  
         <source-file src="src/android/SecurityUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>
         <source-file src="src/android/Base64Util.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>
-        <source-file src="src/android/JsonUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>
         <source-file src="src/android/RSAUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>    
         <source-file src="src/android/FileUtil.java" target-dir="app/src/main/java/com/runchain/plugins/security"/>    
         <config-file target="res/xml/config.xml" parent="/*">  
