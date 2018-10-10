@@ -98,8 +98,9 @@ public class SecurityUtil extends CordovaPlugin {
     } else if ("getPublicKeyMethod".equals(action)) {
       String msg = args.getString(0);
       try {
+        String publicKey = FileUtil.read(pubFilePath);
 
-        callbackContext.success("publicKey");
+        resultObj.put("publicKey", publicKey);
 
       } catch (Exception e) {
         code = "-1";
