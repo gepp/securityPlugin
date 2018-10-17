@@ -28,8 +28,8 @@ securityAPI.getPublicKeyMethod = function (arg0, success, error) {
  * @param {*} success 
  * @param {*} error 
  */
-securityAPI.signMethod = function (arg0, success, error) {
-    exec(success, error, "SecurityUtil", "signMethod", [arg0]);
+securityAPI.signMethod = function (arg0, arg1, success, error) {
+    exec(success, error, "SecurityUtil", "signMethod", [arg0, arg1]);
 };
 /**
  * 验签
@@ -38,8 +38,8 @@ securityAPI.signMethod = function (arg0, success, error) {
  * @param {*} success 
  * @param {*} error 
  */
-securityAPI.verifyMethod = function (arg0, arg1, success, error) {
-    exec(success, error, "SecurityUtil", "verifyMethod", [arg0, arg1]);
+securityAPI.verifyMethod = function (arg0, arg1, arg2,success, error) {
+    exec(success, error, "SecurityUtil", "verifyMethod", [arg0, arg1,arg2]);
 };
 
 module.exports = securityAPI;

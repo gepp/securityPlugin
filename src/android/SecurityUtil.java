@@ -46,23 +46,24 @@ public class SecurityUtil extends CordovaPlugin {
 
     File dataDirectory = context.getFilesDir();
 
-    String pubFilePath = dataDirectory.getAbsolutePath() + "/" + "public.key";
+    String pubFilePath = dataDirectory.getAbsolutePath() + "/";
 
-    String privateFilePath = dataDirectory.getAbsolutePath() + "/" + "private.key";
+    String privateFilePath = dataDirectory.getAbsolutePath() + "/";
 
-    File pubFile = new File(pubFilePath);
-
-    File priFile = new File(privateFilePath);
-
-    Log.d(LOG_TAG, "pubFilePath: " + pubFilePath);
-
-    Log.d(LOG_TAG, "privateFilePath: " + privateFilePath);
 
     if ("genKeyPairMethod".equals(action)) {
 
-      String msg = args.getString(0);
+      String username = args.getString(0);
 
-      Log.d(LOG_TAG, "MSG: " + msg);
+      Log.d(LOG_TAG, "username: " + username);
+
+      File pubFile = new File(pubFilePath + username + ".publickey");
+
+      File priFile = new File(privateFilePath + username + ".privatekey");
+
+      Log.d(LOG_TAG, "pubFilePath: " + pubFilePath);
+
+      Log.d(LOG_TAG, "privateFilePath: " + privateFilePath);
 
       try {
         Map<String, Object> keyMap = RSAUtil.genKeyPair();
@@ -78,10 +79,10 @@ public class SecurityUtil extends CordovaPlugin {
           code = "-1";
           message = "file is exist";
         } else {
-          FileUtil.createFile(pubFilePath);
-          FileUtil.write(pubFilePath, publicKey);
-          FileUtil.createFile(privateFilePath);
-          FileUtil.write(privateFilePath, privateKey);
+          FileUtil.createFile(pubFile.getAbsolutePath());
+          FileUtil.write(pubFile.getAbsolutePath(), publicKey);
+          FileUtil.createFile(priFile.getAbsolutePath());
+          FileUtil.write(priFile.getAbsolutePath(), privateKey);
         }
 
       } catch (Exception e) {
@@ -96,9 +97,9 @@ public class SecurityUtil extends CordovaPlugin {
       callbackContext.success(resultObj);
 
     } else if ("getPublicKeyMethod".equals(action)) {
-      String msg = args.getString(0);
+      String username = args.getString(0);
       try {
-        String publicKey = FileUtil.read(pubFilePath);
+        String publicKey = FileUtil.read(pubFilePath + username + ".publickey");
 
         resultObj.put("publicKey", publicKey);
 
@@ -114,23 +115,30 @@ public class SecurityUtil extends CordovaPlugin {
 
     } else if ("signMethod".equals(action)) {
 
-      String msg = args.getString(0);
-      Log.d(LOG_TAG, "signMethod-->MSG: " + msg);
+      String username = args.getString(0);
+
+      String signData = args.getString(1);
+
+      File pubFile = new File(pubFilePath + username + ".publickey");
+
+      File priFile = new File(privateFilePath + username + ".privatekey");
+
+      Log.d(LOG_TAG, "signMethod-->username: " + username);
+
+      Log.d(LOG_TAG, "signMethod-->signData: " + signData);
       try {
 
         if (!pubFile.exists()) {
           code = "-1";
           message = "please init key";
         } else {
-          String publicKey = FileUtil.read(pubFilePath);
-          String privateKey = FileUtil.read(privateFilePath);
-          byte[] data = msg.getBytes("utf-8");
+          String publicKey = FileUtil.read(pubFile.getAbsolutePath());
+          String privateKey = FileUtil.read(priFile.getAbsolutePath());
+          byte[] data = signData.getBytes("utf-8");
           String sign = RSAUtil.sign(data, privateKey);
           resultObj.put("sign", sign);
           Log.d(LOG_TAG, "sign: " + sign);
         }
-
-
       } catch (Exception e) {
         code = "-1";
         message = e.getMessage();
@@ -144,19 +152,23 @@ public class SecurityUtil extends CordovaPlugin {
 
     } else if ("verifyMethod".equals(action)) {
 
-      String msg = args.getString(0);
+      String username = args.getString(0);
 
-      String sign = args.getString(1);
+      String signData = args.getString(1);
 
-      Log.d(LOG_TAG, "verifyMethod-->msg: " + msg);
+      String sign = args.getString(2);
+
+      Log.d(LOG_TAG, "verifyMethod-->username: " + username);
+
+      Log.d(LOG_TAG, "verifyMethod-->signData: " + signData);
 
       Log.d(LOG_TAG, "verifyMethod-->sign: " + sign);
 
-      String publicKey = FileUtil.read(pubFilePath);
+      String publicKey = FileUtil.read(pubFilePath + username + ".publickey");
 
       try {
 
-        byte[] data = msg.getBytes("utf-8");
+        byte[] data = signData.getBytes("utf-8");
 
         boolean status = RSAUtil.verify(data, publicKey, sign);
 
