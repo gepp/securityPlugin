@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="securityPlugin" version="1.0.6" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>securityPlugin</name>
+<plugin id="runchain-cordova-plugin-security" version="1.0.7" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>runchain-cordova-plugin-security</name>
     <js-module name="securityPlugin" src="www/securityPlugin.js">
         <clobbers target="securityPlugin" />
     </js-module>
