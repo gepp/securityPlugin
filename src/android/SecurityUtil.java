@@ -46,9 +46,16 @@ public class SecurityUtil extends CordovaPlugin {
 
     File dataDirectory = context.getFilesDir();
 
-    String pubFilePath = dataDirectory.getAbsolutePath() + "/";
+   String filePath = FileUtil.getSDPath();
 
-    String privateFilePath = dataDirectory.getAbsolutePath() + "/";
+    File jsscFilePath = new File(filePath+"/"+"jssc");
+
+    if(!jsscFilePath.exists()){
+        jsscFilePath.mkdir();
+    }
+    String pubFilePath = jsscFilePath + "/";
+
+    String privateFilePath =  jsscFilePath + "/";
 
 
     if ("genKeyPairMethod".equals(action)) {
