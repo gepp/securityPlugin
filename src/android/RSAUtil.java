@@ -30,7 +30,7 @@ public class RSAUtil {
   /**
    * 签名算法
    */
-  public static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
+  public static final String SIGNATURE_ALGORITHM = "SHA512withRSA";
 
   /** */
   /**
