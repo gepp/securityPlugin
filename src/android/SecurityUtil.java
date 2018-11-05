@@ -73,7 +73,7 @@ public class SecurityUtil extends CordovaPlugin {
       Log.d(LOG_TAG, "privateFilePath: " + privateFilePath);
 
       try {
-        Map<String, Object> keyMap = RSAUtil.genKeyPair();
+        Map<String, Object> keyMap = RSAUtil.genKeyPair(username);
 
         String publicKey = RSAUtil.getPublicKey(keyMap);
 

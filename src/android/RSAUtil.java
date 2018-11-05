@@ -65,9 +65,9 @@ public class RSAUtil {
    * @return
    * @throws Exception
    */
-  public static Map<String, Object> genKeyPair() throws Exception {
+  public static Map<String, Object> genKeyPair(String username) throws Exception {
     KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
-    SecureRandom secureRandom=new SecureRandom();
+    SecureRandom secureRandom=new SecureRandom(username.getBytes());
     keyPairGen.initialize(2048,secureRandom);
     KeyPair keyPair = keyPairGen.generateKeyPair();
 
